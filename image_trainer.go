@@ -2,26 +2,26 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
+	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 var db *gorm.DB
 
-// S3Bucket S3 credentials
-type S3Bucket struct {
-	Token  string
-	Secret string
-	Bucket string
-}
-
 func main() {
 	fmt.Println("Image Trainer")
 
 	db = dbConnect()
 	dbInit()
+
+	r := mux.NewRouter()
+	r.HandleFunc("/s3/bucket", S3BucketCreateHandler).Methods("POST")
+	http.Handle("/", r)
+	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("IMAGE_TRAINER_PORT")), nil)
 }
 
 func dbConnect() *gorm.DB {
