@@ -35,4 +35,7 @@ func dbConnect() *gorm.DB {
 
 func dbInit() {
 	db.AutoMigrate(&S3Bucket{})
+	db.AutoMigrate(&Image{})
+	db.AutoMigrate(&Classification{})
+	db.AutoMigrate(&ImageClassification{})
 }
