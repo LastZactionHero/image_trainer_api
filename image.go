@@ -11,10 +11,10 @@ import (
 
 // Image represents an image file on S3
 type Image struct {
-	ID         int64
-	CreatedAt  time.Time
-	Key        string
-	Classified bool `gorm:"default:0"`
+	ID         int64     `json:"id"`
+	CreatedAt  time.Time `json:"created_at"`
+	Key        string    `json:"key"`
+	Classified bool      `json:"classified", gorm:"default:0"`
 }
 
 // FindImageByKey find image by key

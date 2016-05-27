@@ -5,9 +5,9 @@ import "time"
 // Classification option for Image
 type Classification struct {
 	ID        int64
-	CreatedAt time.Time
-	Name      string `json:"name"`
-	Hotkey    string `json:"hotkey"`
+	CreatedAt time.Time `json:"created_at"`
+	Name      string    `json:"name"`
+	Hotkey    string    `json:"hotkey"`
 }
 
 // Valid does the classification have all necessary data
