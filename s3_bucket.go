@@ -45,11 +45,17 @@ func ClearImages(db *gorm.DB) {
 	db.Where("id > ?", 0).Delete(&ImageClassification{})
 }
 
-// DownloadBucket download all bucket files
-func DownloadBucket() {
+// ApplyBucketAccess token and secret to env
+func ApplyBucketAccess() {
 	bucket := CurrentBucket(db)
 	os.Setenv("AWS_ACCESS_KEY_ID", bucket.Token)
 	os.Setenv("AWS_SECRET_ACCESS_KEY", bucket.Secret)
+}
+
+// DownloadBucket download all bucket files
+func DownloadBucket() {
+	ApplyBucketAccess()
+	bucket := CurrentBucket(db)
 
 	sess := session.New()
 

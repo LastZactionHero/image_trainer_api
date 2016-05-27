@@ -23,6 +23,8 @@ func main() {
 	r.HandleFunc("/s3/bucket/refresh", S3BucketRefreshHandler).Methods("POST")
 	r.HandleFunc("/classifications", ClassificationsCreateHandler).Methods("POST")
 	r.HandleFunc("/classifications", ClassificationsIndexHandler).Methods("GET")
+	r.HandleFunc("/images/next_file", ImagesNextFileHandler).Methods("GET")
+	r.HandleFunc("/images/next_data", ImagesNextDataHandler).Methods("GET")
 	http.Handle("/", r)
 	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("IMAGE_TRAINER_PORT")), nil)
 }
