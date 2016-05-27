@@ -20,6 +20,9 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/s3/bucket", S3BucketCreateHandler).Methods("POST")
+	r.HandleFunc("/s3/bucket/refresh", S3BucketRefreshHandler).Methods("POST")
+	r.HandleFunc("/classifications", ClassificationsCreateHandler).Methods("POST")
+	r.HandleFunc("/classifications", ClassificationsIndexHandler).Methods("GET")
 	http.Handle("/", r)
 	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("IMAGE_TRAINER_PORT")), nil)
 }
