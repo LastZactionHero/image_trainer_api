@@ -4,7 +4,9 @@ API for classifying images for use with a neural network. Handles coordination w
 
 ## Environmental Variables
 
-IMAGE_TRAINER_DB_PATH - Path to SQLite3 database
+IMAGE_TRAINER_DB_USER - Mysql DB User
+IMAGE_TRAINER_DB_PASS - Mysql DB Password
+IMAGE_TRAINER_DB_NAME - Mysql DB Name
 
 IMAGE_TRAINER_PORT - Server Port
 
