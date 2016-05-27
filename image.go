@@ -11,15 +11,26 @@ import (
 
 // Image represents an image file on S3
 type Image struct {
-	ID        int64
-	CreatedAt time.Time
-	Key       string
+	ID         int64
+	CreatedAt  time.Time
+	Key        string
+	Classified bool `gorm:"default:0"`
+}
+
+// FindImageByKey find image by key
+func FindImageByKey(key string) *Image {
+	var image Image
+	db.Where("key = ?", key).First(&image)
+	if image.ID == 0 {
+		return nil
+	}
+	return &image
 }
 
 // NextImage return the next image to classify
 func NextImage() *Image {
 	var image Image
-	db.First(&image)
+	db.Where("classified = ?", 0).First(&image)
 	if image.ID == 0 {
 		return nil
 	}

@@ -25,6 +25,8 @@ func main() {
 	r.HandleFunc("/classifications", ClassificationsIndexHandler).Methods("GET")
 	r.HandleFunc("/images/next_file", ImagesNextFileHandler).Methods("GET")
 	r.HandleFunc("/images/next_data", ImagesNextDataHandler).Methods("GET")
+	r.HandleFunc("/images/remaining", ImagesRemainingHandler).Methods("GET")
+	r.HandleFunc("/classify", ClassifyCreateHandler).Methods("POST")
 	http.Handle("/", r)
 	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("IMAGE_TRAINER_PORT")), nil)
 }

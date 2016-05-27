@@ -33,3 +33,16 @@ func ImagesNextDataHandler(writer http.ResponseWriter, request *http.Request) {
 
 	writer.Write(json)
 }
+
+// ImagesRemainingHandler count image images remaining
+func ImagesRemainingHandler(writer http.ResponseWriter, request *http.Request) {
+	var count uint
+	db.Model(&Image{}).Where("classified = ?", 0).Count(&count)
+
+	type countResponse struct {
+		Count uint `json:"count"`
+	}
+
+	json, _ := json.Marshal(countResponse{Count: count})
+	writer.Write(json)
+}
