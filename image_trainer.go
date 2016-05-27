@@ -7,7 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var db *gorm.DB
@@ -32,9 +32,15 @@ func main() {
 }
 
 func dbConnect() *gorm.DB {
-	dbPath := os.Getenv("IMAGE_TRAINER_DB_PATH")
-	db, err := gorm.Open("sqlite3", dbPath)
+	dbUser := os.Getenv("IMAGE_TRAINER_DB_USER")
+	dbPass := os.Getenv("IMAGE_TRAINER_DB_PASS")
+	dbName := os.Getenv("IMAGE_TRAINER_DB_NAME")
+	connectStr := fmt.Sprintf("%s:%s@/%s", dbUser, dbPass, dbName)
+	fmt.Println(connectStr)
+	db, err := gorm.Open("mysql", connectStr)
+
 	if err != nil {
+		fmt.Println(err)
 		panic("failed to connect to database")
 	}
 	return db
