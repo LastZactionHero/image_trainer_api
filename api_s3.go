@@ -28,6 +28,7 @@ func S3BucketCreateHandler(responseWriter http.ResponseWriter, request *http.Req
 
 	DeleteBucket(db)
 	db.Create(s3Bucket)
+	DownloadBucket()
 
 	responseWriter.WriteHeader(http.StatusOK)
 }

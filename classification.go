@@ -1,7 +1,11 @@
 package main
 
+import "time"
+
 // Classification option for Image
 type Classification struct {
-	Name   string
-	Hotkey string
+	ID        int64
+	CreatedAt time.Time
+	Name      string
+	Hotkey    string
 }

@@ -1,6 +1,13 @@
 package main
 
-import "github.com/jinzhu/gorm"
+import (
+	"os"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/jinzhu/gorm"
+)
 
 // S3Bucket S3 credentials
 type S3Bucket struct {
@@ -25,8 +32,39 @@ func CurrentBucket(db *gorm.DB) *S3Bucket {
 func DeleteBucket(db *gorm.DB) bool {
 	bucket := CurrentBucket(db)
 	if bucket != nil {
+		ClearImages(db)
 		db.Delete(bucket)
 		return true
 	}
 	return false
+}
+
+// ClearImages delete all Images and ImageClassifications
+func ClearImages(db *gorm.DB) {
+	db.Where("id > 0", 0).Delete(&Image{})
+	db.Where("id > ?", 0).Delete(&ImageClassification{})
+}
+
+// DownloadBucket download all bucket files
+func DownloadBucket() {
+	bucket := CurrentBucket(db)
+	os.Setenv("AWS_ACCESS_KEY_ID", bucket.Token)
+	os.Setenv("AWS_SECRET_ACCESS_KEY", bucket.Secret)
+
+	sess := session.New()
+
+	svc := s3.New(sess, &aws.Config{Region: aws.String("us-west-1")})
+
+	err := svc.ListObjectsPages(&s3.ListObjectsInput{
+		Bucket: &bucket.Bucket,
+	}, func(p *s3.ListObjectsOutput, last bool) (shouldContinue bool) {
+		for _, obj := range p.Contents {
+			image := Image{Key: *obj.Key}
+			db.Create(&image)
+		}
+		return true
+	})
+	if err != nil {
+		panic(err)
+	}
 }
