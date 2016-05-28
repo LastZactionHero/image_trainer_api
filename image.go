@@ -18,7 +18,7 @@ type Image struct {
 // FindImageByKey find image by key
 func FindImageByKey(key string) *Image {
 	var image Image
-	db.Where("key = ?", key).First(&image)
+	db.Where(&Image{Key: key}).First(&image)
 	if image.ID == 0 {
 		return nil
 	}
