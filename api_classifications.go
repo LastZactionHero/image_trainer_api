@@ -10,6 +10,7 @@ import (
 // ClassificationsCreateHandler create a Classification
 func ClassificationsCreateHandler(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("Classifications Create Handler")
+	apiApplyCorsHeaders(writer, request)
 
 	body, _ := ioutil.ReadAll(request.Body)
 	var classification Classification

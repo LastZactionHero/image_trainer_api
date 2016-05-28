@@ -19,6 +19,12 @@ func main() {
 	dbInit()
 
 	r := mux.NewRouter()
+
+	r.HandleFunc("/s3/bucket", optionsHandler).Methods("OPTIONS")
+	r.HandleFunc("/s3/bucket/refresh", optionsHandler).Methods("OPTIONS")
+	r.HandleFunc("/classifications", optionsHandler).Methods("OPTIONS")
+	r.HandleFunc("/classify", optionsHandler).Methods("OPTIONS")
+
 	r.HandleFunc("/s3/bucket", S3BucketCreateHandler).Methods("POST")
 	r.HandleFunc("/s3/bucket/refresh", S3BucketRefreshHandler).Methods("POST")
 	r.HandleFunc("/s3/bucket/status", S3BucketStatusHandler).Methods("GET")
@@ -37,7 +43,6 @@ func dbConnect() *gorm.DB {
 	dbPass := os.Getenv("IMAGE_TRAINER_DB_PASS")
 	dbName := os.Getenv("IMAGE_TRAINER_DB_NAME")
 	connectStr := fmt.Sprintf("%s:%s@/%s", dbUser, dbPass, dbName)
-	fmt.Println(connectStr)
 	db, err := gorm.Open("mysql", connectStr)
 
 	if err != nil {

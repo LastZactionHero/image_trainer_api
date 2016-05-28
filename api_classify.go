@@ -9,6 +9,7 @@ import (
 // ClassifyCreateHandler create classifications for an image
 func ClassifyCreateHandler(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("Classify Create Handler")
+	apiApplyCorsHeaders(writer, request)
 
 	// Parse Request Body
 	// key:
