@@ -42,6 +42,8 @@ func ClassificationsCreateHandler(writer http.ResponseWriter, request *http.Requ
 
 // ClassificationsIndexHandler list all Classifications
 func ClassificationsIndexHandler(writer http.ResponseWriter, request *http.Request) {
+	apiApplyCorsHeaders(writer, request)
+
 	var classifications []Classification
 	db.Find(&classifications)
 

@@ -10,6 +10,7 @@ import (
 // S3BucketStatusHandler current status
 func S3BucketStatusHandler(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("S3BucketStatusHandler")
+	apiApplyCorsHeaders(writer, request)
 
 	type bucketResponse struct {
 		Bucket string `json:"bucket"`

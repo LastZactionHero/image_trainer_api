@@ -7,6 +7,7 @@ import (
 
 // ImagesNextFileHandler get the next image file to classify
 func ImagesNextFileHandler(writer http.ResponseWriter, request *http.Request) {
+	apiApplyCorsHeaders(writer, request)
 	image := NextImage()
 	if image == nil {
 		writer.WriteHeader(http.StatusBadRequest)
@@ -20,6 +21,7 @@ func ImagesNextFileHandler(writer http.ResponseWriter, request *http.Request) {
 
 // ImagesNextDataHandler get the next image data to classify
 func ImagesNextDataHandler(writer http.ResponseWriter, request *http.Request) {
+	apiApplyCorsHeaders(writer, request)
 	image := NextImage()
 	if image == nil {
 		writer.WriteHeader(http.StatusBadRequest)
@@ -36,6 +38,7 @@ func ImagesNextDataHandler(writer http.ResponseWriter, request *http.Request) {
 
 // ImagesRemainingHandler count image images remaining
 func ImagesRemainingHandler(writer http.ResponseWriter, request *http.Request) {
+	apiApplyCorsHeaders(writer, request)
 	var count uint
 	db.Model(&Image{}).Where("classified = ?", 0).Count(&count)
 
