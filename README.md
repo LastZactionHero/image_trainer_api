@@ -80,7 +80,6 @@ Response: 200
 ```
 {
   "id":3,
-  "created_at":"2016-05-27T16:40:11.710346661-06:00",
   "key":"image_1463849668.jpg",
   "classified":false
 }

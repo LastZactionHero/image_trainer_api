@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -11,10 +10,9 @@ import (
 
 // Image represents an image file on S3
 type Image struct {
-	ID         int64     `json:"id"`
-	CreatedAt  time.Time `json:"created_at"`
-	Key        string    `json:"key"`
-	Classified bool      `json:"classified", gorm:"default:0"`
+	ID         int64  `json:"id"`
+	Key        string `json:"key"`
+	Classified bool   `json:"classified", gorm:"default:0"`
 }
 
 // FindImageByKey find image by key

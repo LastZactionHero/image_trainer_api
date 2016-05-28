@@ -1,13 +1,10 @@
 package main
 
-import "time"
-
 // Classification option for Image
 type Classification struct {
-	ID        int64
-	CreatedAt time.Time `json:"created_at"`
-	Name      string    `json:"name"`
-	Hotkey    string    `json:"hotkey"`
+	ID     int64
+	Name   string `json:"name"`
+	Hotkey string `json:"hotkey"`
 }
 
 // Valid does the classification have all necessary data
