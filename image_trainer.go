@@ -21,6 +21,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/s3/bucket", S3BucketCreateHandler).Methods("POST")
 	r.HandleFunc("/s3/bucket/refresh", S3BucketRefreshHandler).Methods("POST")
+	r.HandleFunc("/s3/bucket/status", S3BucketStatusHandler).Methods("GET")
 	r.HandleFunc("/classifications", ClassificationsCreateHandler).Methods("POST")
 	r.HandleFunc("/classifications", ClassificationsIndexHandler).Methods("GET")
 	r.HandleFunc("/images/next_file", ImagesNextFileHandler).Methods("GET")

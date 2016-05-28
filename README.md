@@ -4,13 +4,24 @@ API for classifying images for use with a neural network. Handles coordination w
 
 ## Environmental Variables
 
-IMAGE_TRAINER_DB_USER - Mysql DB User
-IMAGE_TRAINER_DB_PASS - Mysql DB Password
-IMAGE_TRAINER_DB_NAME - Mysql DB Name
-
-IMAGE_TRAINER_PORT - Server Port
+- IMAGE_TRAINER_DB_USER - Mysql DB User
+- IMAGE_TRAINER_DB_PASS - Mysql DB Password
+- IMAGE_TRAINER_DB_NAME - Mysql DB Name
+- IMAGE_TRAINER_PORT - Server Port
 
 ## API
+
+#### GET /s3/bucket/status
+Get current status of S3 Bucket
+
+Body: None
+
+Response: 200
+```
+{
+  bucket: "my_bucket_name"
+}
+```
 
 #### POST /s3/bucket
 Create the S3 Bucket and create a record for all Images

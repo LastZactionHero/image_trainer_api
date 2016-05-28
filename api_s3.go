@@ -7,6 +7,25 @@ import (
 	"net/http"
 )
 
+// S3BucketStatusHandler current status
+func S3BucketStatusHandler(writer http.ResponseWriter, request *http.Request) {
+	fmt.Println("S3BucketStatusHandler")
+
+	type bucketResponse struct {
+		Bucket string `json:"bucket"`
+	}
+	currentBucket := CurrentBucket(db)
+	response := bucketResponse{Bucket: currentBucket.Bucket}
+
+	json, err := json.Marshal(response)
+	if err != nil {
+		writer.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	writer.Write(json)
+}
+
 // S3BucketCreateHandler API create bucket
 func S3BucketCreateHandler(responseWriter http.ResponseWriter, request *http.Request) {
 	fmt.Println("S3BucketCreateHandler")
