@@ -53,5 +53,6 @@ func ClassificationsIndexHandler(writer http.ResponseWriter, request *http.Reque
 		return
 	}
 
+	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(json)
 }

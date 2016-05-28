@@ -24,6 +24,7 @@ func S3BucketStatusHandler(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
+	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(json)
 }
 

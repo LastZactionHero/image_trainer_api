@@ -33,6 +33,7 @@ func ImagesNextDataHandler(writer http.ResponseWriter, request *http.Request) {
 		writer.WriteHeader(http.StatusInternalServerError)
 	}
 
+	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(json)
 }
 
@@ -47,5 +48,6 @@ func ImagesRemainingHandler(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	json, _ := json.Marshal(countResponse{Count: count})
+	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(json)
 }
