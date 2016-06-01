@@ -89,7 +89,8 @@ Get image for the next Image to classify
 
 Body: None
 
-Response: 200 + <image file>
+Response: 200
+Image File
 
 #### GET /images/remaining
 Number of images remaining to classify
@@ -117,3 +118,11 @@ Body:
 ```
 
 Response: 200
+
+#### GET /csv
+Get CSV output of all image classifications
+
+Body: None
+
+Response: 200
+CSV File

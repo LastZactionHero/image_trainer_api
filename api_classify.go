@@ -61,3 +61,10 @@ func ClassifyCreateHandler(writer http.ResponseWriter, request *http.Request) {
 	image.Classified = true
 	db.Save(image)
 }
+
+// CsvHandler output CSV of classifications
+func CsvHandler(writer http.ResponseWriter, request *http.Request) {
+	csvString := ClassificationCsv()
+	writer.Header().Set("Content-Type", "text/csv")
+	writer.Write([]byte(csvString))
+}
